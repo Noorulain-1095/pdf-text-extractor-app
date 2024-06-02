@@ -2,7 +2,7 @@
 
 ## Overview
 
-The PDF Text Extractor App is a simple web application that allows users to upload PDF files and extract their text content. This project demonstrates a full stack development approach, covering both the frontend and backend aspects.
+The PDF Text Extractor App is a simple web application buit with React and Node.js that allows users to upload PDF files and extract their text content. This project demonstrates a full stack development approach, covering both the frontend and backend aspects.
 
 ## Features
 
@@ -53,7 +53,7 @@ The PDF Text Extractor App is a simple web application that allows users to uplo
 1. Navigate to the frontend directory:
 
     ```bash
-    cd ../frontend
+    cd frontend
     ```
 
 2. Install dependencies:
