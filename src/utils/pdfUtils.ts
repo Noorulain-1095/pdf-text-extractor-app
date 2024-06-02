@@ -1,29 +1,31 @@
-// Utility function to render a page from a PDF document
-export const renderPage = async (pageData: any) => {
+/**Utility function from pdf Parser library to render a page from a PDF document
+ * This function processes the text content of a PDF page and returns the extracted text as a string
+**/
+export const renderPage = (pageData: any) => {
   // Options to control how the text content is rendered
   const renderOptions = {
     normalizeWhitespace: false,
     disableCombineTextItems: false
   };
 
-  // Extract the text content from the page with the specified render options
-  const textContent = await pageData.getTextContent(renderOptions);
-
-  let lastY: number | null = null;
-  let text = ''; 
-
-  // Iterate over each text item in the page
-  for (let item of textContent.items) {
-    if (lastY === item.transform[5] || lastY === null) {
-      if (text !== '') {
-        text += ' ';
-      }
-      text += item.str;
-    } else {
-      text += '\n' + item.str;
-    }
-    lastY = item.transform[5];
-  }
-
-  return text;
+  return pageData.getTextContent(renderOptions)
+      .then((textContent: any) => {
+          let lastY, text = '';
+          for (let item of textContent.items) {
+              if (lastY == item.transform[5] || !lastY) {
+                  // Append a space if there's already text
+                  if (text !== '') {
+                      text += ' ';
+                  }
+                  text += item.str;
+              } else {
+                  text += '\n' + item.str;
+              }
+              lastY = item.transform[5];
+          }
+          return text;
+      })
+      .catch((error: any) => {
+        console.warn('Error processing page text content:', error);
+      });
 };

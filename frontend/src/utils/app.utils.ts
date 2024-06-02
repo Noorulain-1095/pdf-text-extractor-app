@@ -1,10 +1,8 @@
-// app.utils.ts
-
 import { ChangeEvent, FormEvent } from 'react';
 import { extractTextFromPDF } from '../services/apiService';
 import { constants } from '../constants/app.constants'
 
-// Utility functions
+//Uploads pdf file
 export const handleFileChange = (setFile: React.Dispatch<React.SetStateAction<File | null>>, setFileURL: React.Dispatch<React.SetStateAction<string | null>>) => (event: ChangeEvent<HTMLInputElement>) => {
   if (event.target.files) {
     const selectedFile = event.target.files[0];
@@ -13,6 +11,7 @@ export const handleFileChange = (setFile: React.Dispatch<React.SetStateAction<Fi
   }
 };
 
+//Submits pdf file to get extracted text result
 export const handleSubmit = (file: File | null, setLoading: React.Dispatch<React.SetStateAction<boolean>>, setError: React.Dispatch<React.SetStateAction<string | null>>, setText: React.Dispatch<React.SetStateAction<string>>) => async (event: FormEvent) => {
   event.preventDefault();
 
@@ -26,7 +25,12 @@ export const handleSubmit = (file: File | null, setLoading: React.Dispatch<React
 
   try {
     const extractedText = await extractTextFromPDF(file);
-    setText(extractedText);
+    if(extractedText.data){
+      setText(extractedText.data);
+    }
+    else{
+      throw Error(extractedText)
+    }
   } catch (error) {
     setError(constants.ERROR_MESSAGE); // Set error message
     console.error(constants.ERROR_MESSAGE, error);
@@ -35,11 +39,13 @@ export const handleSubmit = (file: File | null, setLoading: React.Dispatch<React
   }
 };
 
+// Copy all extracted text in textbox
 export const handleCopy = (text: string) => {
   navigator.clipboard.writeText(text);
   alert(constants.COPY_SUCCESS_MESSAGE);
 };
 
+// Downloads txt file of extracted content
 export const handleDownload = (text: string) => {
   const blob = new Blob([text], { type: 'text/plain' });
   const url = URL.createObjectURL(blob);
