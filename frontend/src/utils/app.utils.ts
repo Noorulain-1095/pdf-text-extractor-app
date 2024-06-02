@@ -3,12 +3,24 @@ import { extractTextFromPDF } from '../services/apiService';
 import { constants } from '../constants/app.constants'
 
 //Uploads pdf file
-export const handleFileChange = (setFile: React.Dispatch<React.SetStateAction<File | null>>, setFileURL: React.Dispatch<React.SetStateAction<string | null>>) => (event: ChangeEvent<HTMLInputElement>) => {
+export const handleFileChange = (
+  setFile: React.Dispatch<React.SetStateAction<File | null>>, 
+  setFileURL: React.Dispatch<React.SetStateAction<string | null>>,
+  setError: React.Dispatch<React.SetStateAction<string | null>>
+) => (event: ChangeEvent<HTMLInputElement>) => {
+
   if (event.target.files) {
     const selectedFile = event.target.files[0];
-    setFile(selectedFile);
-    setFileURL(URL.createObjectURL(selectedFile));
+    if (selectedFile && selectedFile.type === 'application/pdf') {
+      setFile(selectedFile);
+      setFileURL(URL.createObjectURL(selectedFile));
+    } else {
+      setError('Please select a valid PDF file.');
+      // Clear the input value to remove the invalid file
+      event.target.value = '';
+    }
   }
+  
 };
 
 //Submits pdf file to get extracted text result

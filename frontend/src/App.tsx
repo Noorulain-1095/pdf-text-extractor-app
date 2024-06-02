@@ -41,7 +41,7 @@ const App: React.FC = () => {
           show={showAlert}
         />
         <Box my={4} position="relative">
-          <Header handleSubmit={handleSubmit(file, setLoading, setError, setText)} handleFileChange={handleFileChange(setFile, setFileURL)} file={file} />
+          <Header handleSubmit={handleSubmit(file, setLoading, setError, setText)} handleFileChange={handleFileChange(setFile, setFileURL,setError)} file={file} />
           <ViewerContainer fileURL={fileURL} text={text} loading={loading} handleCopy={() => handleCopy(text)} handleDownload={() => handleDownload(text)} />
         </Box>
       </Container>

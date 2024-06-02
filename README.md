@@ -9,6 +9,7 @@ The PDF Text Extractor App is a simple web application that allows users to uplo
 - Upload a PDF file through a web interface.
 - Extract and display the text content of the uploaded PDF.
 - Simple and user-friendly interface with the option of clipboard and download file contents in .txt
+- Security measures against malicious file upload
 
 ## Demo 
 
@@ -43,7 +44,9 @@ The PDF Text Extractor App is a simple web application that allows users to uplo
     npm start
     ```
 
-    The backend server will be running on `http://localhost:3000`.
+    The backend server will be running on `http://localhost:5001`.
+
+    Make sure to update any environment variables in the `.env` file from `.env.example`.
 
 ### Running the Frontend
 
