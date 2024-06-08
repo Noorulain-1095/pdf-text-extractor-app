@@ -26,46 +26,34 @@ The PDF Text Extractor App is a simple web application buit with React and Node.
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/yourusername/pdf-text-extractor-app.git
+    git clone https://github.com/Noorulain-1095/pdf-text-extractor-app
     cd pdf-text-extractor-app
     ```
 
 2. Install the dependencies:
 
     ```bash
-    npm install
+    npm run update
     ```
 
-### Running the Backend
-
-1. Start the backend server:
+### Running the Application
 
     ```bash
     npm start
     ```
-
-    The backend server will be running on `http://localhost:5001`.
 
     Make sure to update any environment variables in the `.env` file from `.env.example`.
 
-### Running the Frontend
+### Running the Test
 
-1. Navigate to the frontend directory:
-
-    ```bash
-    cd frontend
-    ```
-
-2. Install dependencies:
+1. To run API test cases:
 
     ```bash
-    npm install
+    npm run test
     ```
 
-3. Start the frontend development server:
+3. To run frontend test cases:
 
     ```bash
-    npm start
+    npm run test-frontend
     ```
-
-    The frontend development server will be running on `http://localhost:3000` (or another port if 3000 is occupied).
