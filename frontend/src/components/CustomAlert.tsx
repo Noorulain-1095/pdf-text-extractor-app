@@ -9,8 +9,9 @@ interface CustomAlertProps {
 }
 
 const CustomAlert: React.FC<CustomAlertProps> = ({ severity, message, onClose, show }) => {
+  if (!show) return null;
   return (
-    <Collapse in={show}>
+    <Collapse in={show} >
       <Box position="absolute" top={0} right={0} m={2}>
         <Alert severity={severity} onClose={onClose}>
           {message}
