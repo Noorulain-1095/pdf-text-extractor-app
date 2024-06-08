@@ -2,7 +2,8 @@ export const constants = {
   ALERT_TIMEOUT: 60000, // 1 minute
   ERROR_MESSAGE: 'Error extracting text from PDF',
   COPY_SUCCESS_MESSAGE: 'Text copied to clipboard',
-  NO_PDF_UPLOADED: 'No PDF uploaded. Please upload a PDF to extract text.'
+  NO_PDF_UPLOADED: 'No PDF uploaded. Please upload a PDF to extract text.',
+  VALID_PDF_ERROR: "Please select a valid PDF file."
 };
 
 export interface HeaderProps {

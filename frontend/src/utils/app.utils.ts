@@ -16,7 +16,7 @@ export const handleFileChange = (
       setFile(selectedFile);
       setFileURL(URL.createObjectURL(selectedFile));
     } else {
-      showError('Please select a valid PDF file.');
+      showError(constants.VALID_PDF_ERROR);
       // Clear the input value to remove the invalid file
       event.target.value = '';
     }
