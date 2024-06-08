@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { Container, Box, CssBaseline } from '@mui/material';
-import { constants } from './constants/app.constants';
 import './App.css';
 
 // services
 import { handleFileChange, handleSubmit, handleCopy, handleDownload } from './utils/app.utils'
+import ErrorContext from '../src//context/ErrorContext';
 
 //components
-import CustomAlert from './components/CustomAlert';
 import Header from './components/Header';
 import ViewerContainer from './components/ViewerContainer';
 
@@ -16,36 +15,25 @@ const App: React.FC = () => {
   const [text, setText] = useState<string>('');
   const [fileURL, setFileURL] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
-  const [showAlert, setShowAlert] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (error) {
-      setShowAlert(true);
-      const timer = setTimeout(() => {
-        setShowAlert(false);
-      }, constants.ALERT_TIMEOUT);
+  const context = useContext(ErrorContext);
 
-      return () => clearTimeout(timer);
-    }
-  }, [error]);
+  if (!context) {
+    throw new Error('SomeComponent must be used within an ErrorProvider');
+  }
+
+  const { showError } = context;
 
   return (
-    <React.Fragment>
+    <>
       <CssBaseline />
       <Container maxWidth="lg">
-        <CustomAlert
-          severity="error"
-          message={error || ''}
-          onClose={() => setShowAlert(false)}
-          show={showAlert}
-        />
         <Box my={4} position="relative">
-          <Header handleSubmit={handleSubmit(file, setLoading, setError, setText)} handleFileChange={handleFileChange(setFile, setFileURL,setError)} file={file} />
+          <Header handleSubmit={handleSubmit(file, setLoading, showError, setText)} handleFileChange={handleFileChange(setFile, setFileURL,showError)} file={file} />
           <ViewerContainer fileURL={fileURL} text={text} loading={loading} handleCopy={() => handleCopy(text)} handleDownload={() => handleDownload(text)} />
         </Box>
       </Container>
-    </React.Fragment>
+    </>
   );
 };
 

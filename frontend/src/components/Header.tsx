@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/Header.css';
 import CustomButton from './CustomButton';
 import { Typography, Paper, Box } from '@mui/material';
-import { constants,HeaderProps } from '../constants/app.constants';
+import { HeaderProps } from '../constants/app.constants';
 
 const Header: React.FC<HeaderProps> = ({ handleSubmit, handleFileChange, file }) => {
   return (

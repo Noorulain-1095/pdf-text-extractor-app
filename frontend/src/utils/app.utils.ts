@@ -6,8 +6,9 @@ import { constants } from '../constants/app.constants'
 export const handleFileChange = (
   setFile: React.Dispatch<React.SetStateAction<File | null>>, 
   setFileURL: React.Dispatch<React.SetStateAction<string | null>>,
-  setError: React.Dispatch<React.SetStateAction<string | null>>
+  showError: (message: string) => void
 ) => (event: ChangeEvent<HTMLInputElement>) => {
+
 
   if (event.target.files) {
     const selectedFile = event.target.files[0];
@@ -15,7 +16,7 @@ export const handleFileChange = (
       setFile(selectedFile);
       setFileURL(URL.createObjectURL(selectedFile));
     } else {
-      setError('Please select a valid PDF file.');
+      showError(constants.VALID_PDF_ERROR);
       // Clear the input value to remove the invalid file
       event.target.value = '';
     }
@@ -24,7 +25,11 @@ export const handleFileChange = (
 };
 
 //Submits pdf file to get extracted text result
-export const handleSubmit = (file: File | null, setLoading: React.Dispatch<React.SetStateAction<boolean>>, setError: React.Dispatch<React.SetStateAction<string | null>>, setText: React.Dispatch<React.SetStateAction<string>>) => async (event: FormEvent) => {
+export const handleSubmit = (
+  file: File | null, 
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>, 
+  showError: (message: string) => void, 
+  setText: React.Dispatch<React.SetStateAction<string>>) => async (event: FormEvent) => {
   event.preventDefault();
 
   if (!file) {
@@ -32,7 +37,6 @@ export const handleSubmit = (file: File | null, setLoading: React.Dispatch<React
   }
 
   setLoading(true);
-  setError(null); // Reset error state
   setText(''); // Clear previous text
 
   try {
@@ -44,7 +48,7 @@ export const handleSubmit = (file: File | null, setLoading: React.Dispatch<React
       throw Error(extractedText)
     }
   } catch (error) {
-    setError(constants.ERROR_MESSAGE); // Set error message
+    showError(constants.ERROR_MESSAGE); // Set error message
     console.error(constants.ERROR_MESSAGE, error);
   } finally {
     setLoading(false);
