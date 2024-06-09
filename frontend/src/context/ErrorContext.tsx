@@ -1,5 +1,5 @@
 import React, { createContext, useState, ReactNode } from 'react';
-import CustomAlert from '../components/CustomAlert';
+import CustomAlert from '../components/shared-components/CustomAlert';
 
 interface ErrorContextProps {
   showError: (message: string) => void;

@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react';
-import ViewerContainer from '../components/ViewerContainer';
+import ViewerContainer from '../../components/pdf-text-extractor/PdfViewerContainer';
 
 describe('ViewerContainer', () => {
   test('renders without crashing', () => {
     render(
       <ViewerContainer
+        loading={false}
         fileURL="test.pdf"
         text="Sample text"
-        loading={false}
         handleCopy={() => {}}
         handleDownload={() => {}}
       />
@@ -31,8 +31,8 @@ describe('ViewerContainer', () => {
   test('displays message when fileURL is null', () => {
     render(
       <ViewerContainer
-        fileURL={null}
         text=""
+        fileURL={null}
         loading={false}
         handleCopy={() => {}}
         handleDownload={() => {}}
@@ -45,9 +45,9 @@ describe('ViewerContainer', () => {
   test('displays extracted text when text is provided', () => {
     render(
       <ViewerContainer
+        loading={false}
         fileURL="test.pdf"
         text="Sample text"
-        loading={false}
         handleCopy={() => {}}
         handleDownload={() => {}}
       />
