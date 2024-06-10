@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Header from '../components/Header';
+import Header from '../../components/pdf-text-extractor/FileUploadHeader';
 import { act } from 'react';
 
 describe('Header Component', () => {

@@ -1,8 +1,8 @@
 import React from 'react';
-import '../styles/Header.css';
-import CustomButton from './CustomButton';
+import '../../styles/Header.css';
+import CustomButton from '../shared-components/CustomButton';
 import { Typography, Paper, Box } from '@mui/material';
-import { HeaderProps } from '../constants/app.constants';
+import { HeaderProps } from '../../constants/constants';
 
 const Header: React.FC<HeaderProps> = ({ handleSubmit, handleFileChange, file }) => {
   return (

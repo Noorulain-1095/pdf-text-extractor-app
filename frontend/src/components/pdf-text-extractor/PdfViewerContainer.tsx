@@ -1,8 +1,8 @@
 import React from 'react';
-import '../styles/ViewerContainer.css';
+import '../../styles/ViewerContainer.css';
 import FileCopyIcon from '@mui/icons-material/FileCopy';
 import DownloadIcon from '@mui/icons-material/Download';
-import { constants, ViewerContainerProps } from '../constants/app.constants';
+import { constants, ViewerContainerProps } from '../../constants/constants';
 import { Box, Typography, Paper, CircularProgress, IconButton } from '@mui/material';
 
 const ViewerContainer: React.FC<ViewerContainerProps> = ({ fileURL, text, loading, handleCopy, handleDownload }) => {
